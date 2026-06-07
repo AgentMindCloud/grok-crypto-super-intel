@@ -1,6 +1,8 @@
+
+### 2. Create / replace requirements.txt
+```txt
 streamlit
 pandas
-plotly
 requests
+plotly
 ccxt
-yfinance
