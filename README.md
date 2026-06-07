@@ -1,20 +1,22 @@
-# Grok Crypto Super Intel
+# 🚀 Grok Crypto Super Intel — FULL NEXT LEVEL
 
-**The ultimate all-in-one crypto intelligence platform built live by Grok.**
+**Your personal Grok-powered crypto command center**
 
-Combines live market data, portfolio tracking, sentiment analysis, backtesting, on-chain insights, ETF flows, and Grok-powered AI reports.
+All-in-one toolkit with live data + AI.
 
 ## Features
-- Real-time prices & market stats
-- Interactive portfolio tracker with P&L
-- X sentiment analysis
-- Strategy backtester
-- On-chain & ETF flow monitor
-- Grok AI co-pilot for research reports
+- Live Market Pulse (real prices + Fear & Greed)
+- Portfolio Tracker + P&L
+- X Sentiment Analyzer
+- Strategy Backtester
+- On-Chain & ETF Monitor
+- Automated Reports
+- Grok AI Co-Pilot (chat with Grok)
+- Auto X Thread Generator
+- Agent Swarm
+- Dream Simulator
 
-## Quick Start
-1. Clone the repo
-2. `pip install -r requirements.txt`
-3. `streamlit run app.py`
-
-Built for you (@JanSol0s) to dominate crypto research and trading insights. Next-level features available on request.
+## Run it
+```bash
+pip install -r requirements.txt
+streamlit run app.py
