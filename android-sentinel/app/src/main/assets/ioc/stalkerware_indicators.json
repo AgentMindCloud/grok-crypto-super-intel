@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "source": "Echap stalkerware-indicators (https://github.com/AssoEchap/stalkerware-indicators)",
+  "license": "CC-BY-4.0",
+  "note": "Starter set. Sentinel also detects stalkerware behaviourally (Accessibility + Device Admin + hidden/sideloaded), so detection does not depend on this list. The full Echap feed (package names, signing-cert SHA-256, C2 domains) is synced in a later phase. Package/cert matches below are publicly documented monitoring/stalkerware indicators.",
+  "packages": [
+    { "package": "com.cerberusapp", "label": "Cerberus", "category": "watchware" }
+  ],
+  "signingCertSha256": []
+}

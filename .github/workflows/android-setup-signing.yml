@@ -1,0 +1,68 @@
+name: Android — Generate signing key (one-time)
+
+# Run this ONCE from the GitHub mobile app (Actions tab -> this workflow -> Run workflow).
+# It generates a release keystore on the runner and prints the four values you must paste into
+# repo Secrets (Settings -> Secrets and variables -> Actions). You never need a computer or keytool.
+# After saving the secrets, every Android build is signed with a stable key so updates install
+# over the top without wiping data. The keystore is NOT committed anywhere.
+
+on:
+  workflow_dispatch:
+    inputs:
+      validity_days:
+        description: "Key validity in days"
+        required: false
+        default: "10000"
+
+permissions:
+  contents: read
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up JDK 21 (provides keytool)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Generate keystore and print secrets
+        run: |
+          set -euo pipefail
+          STORE_PASS="$(openssl rand -base64 24 | tr -dc 'A-Za-z0-9' | head -c 28)"
+          KEY_PASS="$(openssl rand -base64 24 | tr -dc 'A-Za-z0-9' | head -c 28)"
+          ALIAS="sentinel"
+          keytool -genkeypair -v \
+            -keystore release.jks \
+            -alias "$ALIAS" \
+            -keyalg RSA -keysize 4096 \
+            -validity "${{ github.event.inputs.validity_days }}" \
+            -storepass "$STORE_PASS" -keypass "$KEY_PASS" \
+            -dname "CN=Sentinel, OU=Personal, O=Sentinel, C=US"
+          B64="$(base64 -w0 release.jks)"
+          {
+            echo "## Paste these into repo Secrets (Settings → Secrets and variables → Actions)"
+            echo ""
+            echo "Create four secrets with these exact names and values:"
+            echo ""
+            echo "**KEY_ALIAS**"
+            echo '```'
+            echo "$ALIAS"
+            echo '```'
+            echo "**KEYSTORE_PASSWORD**"
+            echo '```'
+            echo "$STORE_PASS"
+            echo '```'
+            echo "**KEY_PASSWORD**"
+            echo '```'
+            echo "$KEY_PASS"
+            echo '```'
+            echo "**KEYSTORE_BASE64**"
+            echo '```'
+            echo "$B64"
+            echo '```'
+            echo ""
+            echo "After saving all four, re-run the **Android — Build Sentinel APK** workflow."
+            echo "Back this up: losing it means future updates can't install over the top."
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -1,0 +1,19 @@
+# Build outputs
+.gradle/
+build/
+*/build/
+app/build/
+
+# Local SDK location (CI provides ANDROID_HOME via setup-android)
+local.properties
+
+# Keystores must never be committed
+*.jks
+*.keystore
+
+# IDE
+.idea/
+*.iml
+captures/
+.externalNativeBuild/
+.cxx/
