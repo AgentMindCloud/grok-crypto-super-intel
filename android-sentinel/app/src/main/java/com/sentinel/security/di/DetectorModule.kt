@@ -2,6 +2,8 @@ package com.sentinel.security.di
 
 import com.sentinel.security.core.scan.Detector
 import com.sentinel.security.feature.appscan.AppScanner
+import com.sentinel.security.feature.integrity.DeviceIntegrityDetector
+import com.sentinel.security.feature.usageanomaly.UsageAnomalyDetector
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoSet
@@ -19,4 +21,12 @@ abstract class DetectorModule {
     @Binds
     @IntoSet
     abstract fun bindAppScanner(impl: AppScanner): Detector
+
+    @Binds
+    @IntoSet
+    abstract fun bindDeviceIntegrityDetector(impl: DeviceIntegrityDetector): Detector
+
+    @Binds
+    @IntoSet
+    abstract fun bindUsageAnomalyDetector(impl: UsageAnomalyDetector): Detector
 }

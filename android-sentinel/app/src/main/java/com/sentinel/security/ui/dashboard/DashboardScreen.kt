@@ -20,6 +20,7 @@ import androidx.compose.material.icons.filled.RadioButtonUnchecked
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Button
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -51,6 +52,8 @@ import java.util.Date
 fun DashboardScreen(
     onOpenLog: () -> Unit,
     onOpenSettings: () -> Unit,
+    onOpenNetscan: () -> Unit,
+    onOpenBreach: () -> Unit,
     viewModel: DashboardViewModel = hiltViewModel(),
 ) {
     val ui by viewModel.uiState.collectAsStateWithLifecycle()
@@ -151,6 +154,17 @@ fun DashboardScreen(
                         Text("Findings (${ui.findings.size})", fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface)
                         ui.findings.forEach { FindingRow(it) }
                     }
+                }
+            }
+
+            // Tools
+            SectionCard {
+                Text("Tools", fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface)
+                OutlinedButton(onClick = onOpenNetscan, modifier = Modifier.fillMaxWidth()) {
+                    Text("Scan my Wi-Fi network")
+                }
+                OutlinedButton(onClick = onOpenBreach, modifier = Modifier.fillMaxWidth()) {
+                    Text("Check a password for breaches")
                 }
             }
 
